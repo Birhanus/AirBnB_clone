@@ -37,20 +37,17 @@ def rearrange(arg):
         return (result, None)
 
 
-
 class HBNBCommand(cmd.Cmd):
     """HBNBCommand class"""
 
- # prompt for interactive/non-interactive section 
-  prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
- # classes that can be created
+    # prompt for interactive/non-interactive section
+    prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
+    # classes that can be created
     classes = {
-                'BaseModel': BaseModel, 'User': User, 'Place': Place,
+               'BaseModel': BaseModel, 'User': User, 'Place': Place,
                'State': State, 'City': City, 'Amenity': Amenity,
                'Review': Review
               }
-
-
     attr_types = {
              'number_rooms': int, 'number_bathrooms': int,
              'max_guest': int, 'price_by_night': int,
@@ -75,7 +72,7 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
-     def help_EOF(self):
+    def help_EOF(self):
         """ Prints the documentation for EOF """
         print("The EOF exits the program\n")
 
@@ -84,28 +81,30 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-       """Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id"""
-     if arg 
-        if arg not in self.__classes:
-         print("** class doesn't exist **")
-     else:
+        """Creates a new instance of BaseModel, saves it (to the JSON file) and
+        prints the id"""
+        if arg:
+            if arg not in self.__classes:
+                print("** class doesn't exist **")
+            else:
                 for keys in self.__classes:
                     if arg == keys:
                         arg = eval(arg)()
                         arg.save()
                         print(arg.id)
-      else:
-          print("** class name missing **")
-          
-     def help_create(self):
+        else:
+            print("** class name missing **")
+
+    def help_create(self):
         """ prints Documentation for the create command """
         print("creates a new instance of the class passed as argument")
         print("[Usage]: create <className>\n")
-     
+
     def do_show(self, arg):
-          """Prints the string representation of an instance based on the class name and id usage
-          """
-       if arg:
+        """Prints the string representation of an instance based
+        on the class name and id usage
+        """
+        if arg:
             if len(arg.split()) > 1:
 
                 arg1 = arg.split()[0]
@@ -123,14 +122,14 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
         else:
             print("** Class name missing **")
-        
-     def help_show(self):
+
+    def help_show(self):
         """ prints documentation for the show command """
         print("prints the string representation of an instance")
         print("[Usage]: show <className> <objectId>\n")
 
-     def do_destroy(self, arg):
-           """Deletes an instance based on the class name and id"""
+    def do_destroy(self, arg):
+        """Deletes an instance based on the class name and id"""
         if arg:
             if len(arg.split()) > 1:
 
@@ -157,9 +156,10 @@ class HBNBCommand(cmd.Cmd):
         print("[Usage]: destroy <className> <objectId>\n")
 
     def do_all(self, arg):
-             """Prints all string representation of all instances based or not on the class name
-             """
-          if arg:
+        """Prints all string representation of all instances based or not
+        on the class name
+        """
+        if arg:
             if arg not in self.__classes:
                 print("** class doesn't exist **")
             else:
@@ -171,13 +171,13 @@ class HBNBCommand(cmd.Cmd):
             for val in obj.values():
                 print(val)
 
-   def help_all(self):
+    def help_all(self):
         ''' prints documentaion for the all command '''
         print("Prints all string representation of all instances")
         print("based or not on the class name")
-        print("[Usage]: all <className>\n")              
+        print("[Usage]: all <className>\n")
 
-   def do_update(self, arg):
+    def do_update(self, arg):
         """Updates an instance based on the class name and id
         by adding or updating attribute (save the change to the JSON file
         Usage: update <class name> <id> <attribute name> "<attribute value>"
@@ -189,7 +189,7 @@ class HBNBCommand(cmd.Cmd):
             if length >= 4:
                 clName = ar[0]
                 if clName not in self.__classes:
-                   print("** class doesn't exist **")
+                    print("** class doesn't exist **")
                 else:
                     id = ar[1]
                     attr = ar[2]
@@ -211,11 +211,11 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
 
-     def help_update(self):
+    def help_update(self):
         """ prints Documentation for the update command """
         print("Updates an object's attributes")
         print("Usage: update <className> <id> <attName> <attVal>\n")
-        
+
     def count_inst(self, arg):
         """This prints all string representation of the all instances
         based on or not the class name
@@ -243,7 +243,7 @@ class HBNBCommand(cmd.Cmd):
         for key, val in obj.items():
             if arg.split(".")[0] == key.split(".")[0]:
                 count = count + 1
-                print(val)    
+                print(val)
 
     def default(self, arg):
         """Let shell to use flags and short hand\n"""
@@ -275,6 +275,5 @@ class HBNBCommand(cmd.Cmd):
         else:
             cmd.Cmd.default(self, arg)
 
-     if __name__ == '__main__':
+    if __name__ == '__main__':
         HBNBCommand().cmdloop()
-             

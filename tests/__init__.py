@@ -4,6 +4,7 @@ import os
 from typing import TextIO
 from models.engine.file_storage import FileStorage
 
+
 def clear_stream(stream: TextIO):
     """Clears the contents of a given stream
     Args:
@@ -12,6 +13,7 @@ def clear_stream(stream: TextIO):
     if stream.seekable():
         stream.seek(0)
         stream.truncate(0)
+
 
 def delete_file(file_path: str):
     """Removes a file if it exists.
@@ -32,6 +34,7 @@ def reset_store(store: FileStorage, file_path='file.json'):
         file.write('{}')
         if store is not None:
             store.reload()
+
 
 def read_text_file(file_name):
     """Reads the contents of a given file.
