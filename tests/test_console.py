@@ -39,23 +39,22 @@ class TestHBNBCommand_prompt(unittest.TestCase):
 
 
 class TestHBNBCommand_help(unittest.TestCase):
-   """Checks for proper output of documentation"""
+    """Checks for proper output of documentation"""
 
-   def test_help(self):
-        """Check the cmd.Cmd parent class help feature along side 
+    def test_help(self):
+        """Check the cmd.Cmd parent class help feature along side
         the console overwritten help function?method
         """
         res = ("Documented commands (type help <topic>):"
                "\n========================================"
-                "\nEOF  all  all2  create  destroy  help  quit  show  update")
+               "\nEOF  all  all2  create  destroy  help  quit  show  update")
         with patch("sys.stdout", new=StringIO()) as out:
             self.assertFalse(HBNBCommand().onecmd("help"))
             self.assertEqual(res, out.getvalue().strip())
 
 
-
-    class TestHBNBCommand_exits(unittest.TestCase):
-       """Checks for proper exit of output"""
+class TestHBNBCommand_exits(unittest.TestCase):
+    """Checks for proper exit of output"""
 
     def test_quit(self):
         """Check the quit command for proper functionality
@@ -71,10 +70,11 @@ class TestHBNBCommand_help(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as out:
             self.assertTrue(HBNBCommand().onecmd("EOF"))
 
-  class TestHBNBCommand_create(unittest.TestCase):
-     """This set of tests checks the create command  in HBNBCommands"""
 
-     @classmethod
+class TestHBNBCommand_create(unittest.TestCase):
+    """This set of tests checks the create command  in HBNBCommands"""
+
+    @classmethod
     def setup(self):
         try:
             os.rename("file.json", "tmp.json")
@@ -93,7 +93,6 @@ class TestHBNBCommand_help(unittest.TestCase):
         except IOError:
             pass
 
-
     def test_create_Err1(self):
         """Expected error if class name is missing
         """
@@ -101,7 +100,6 @@ class TestHBNBCommand_help(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as out:
             self.assertFalse(HBNBCommand().onecmd("create"))
             self.assertEqual(err, out.getvalue().strip())
-
 
     def test_create_Err2(self):
         """Expected error if class doesn't exist
@@ -111,7 +109,6 @@ class TestHBNBCommand_help(unittest.TestCase):
             self.assertFalse(HBNBCommand().onecmd("create Fake"))
             self.assertEqual(err, out.getvalue().strip())
 
-
     def test_create_Err3(self):
         """Expected error if class name is missing
         """
@@ -119,7 +116,6 @@ class TestHBNBCommand_help(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as out:
             self.assertFalse(HBNBCommand().onecmd("Fake.create"))
             self.assertEqual(err, out.getvalue().strip())
-
 
     def test_create_Err4(self):
         """Expected error if class name is missing
@@ -129,11 +125,9 @@ class TestHBNBCommand_help(unittest.TestCase):
             self.assertFalse(HBNBCommand().onecmd("Basemodel.create"))
             self.assertEqual(err, out.getvalue().strip())
 
-
     def test_create_obj(self):
         """Expected create to create objs
         """
-
         with patch("sys.stdout", new=StringIO()) as out:
             self.assertFalse(HBNBCommand().onecmd("create User"))
             self.assertLess(0, len(out.getvalue().strip()))
@@ -171,16 +165,16 @@ class TestHBNBCommand_help(unittest.TestCase):
             self.assertIn(testid, storage.all().keys())
 
 
-  class TestHBNBCommand_help(unittest.TestCase):
+class TestHBNBCommand_help(unittest.TestCase):
     """Cheks for proper documentation output"""
 
     def test_help(self):
-        """Check the cmd.Cmd parent class help feature along side 
+        """Check the cmd.Cmd parent class help feature along side
         the console overwritten help function?method
         """
         res = ("Documented commands (type help <topic>):"
                "\n========================================"
-                "\nEOF  all  all2  create  destroy  help  quit  show  update")
+               "\nEOF  all  all2  create  destroy  help  quit  show  update")
         with patch("sys.stdout", new=StringIO()) as out:
             self.assertFalse(HBNBCommand().onecmd("help"))
             self.assertEqual(res, out.getvalue().strip())

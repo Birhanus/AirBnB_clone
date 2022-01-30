@@ -86,12 +86,11 @@ class TestFileStorage(TestCase):
 
         self.assertEqual(obj.to_dict(), storage.all()[kid].to_dict())
         self.assertFalse(obj is storage.all()[kid].to_dict())
-
-         obj = BaseModel(1, 2, 3)
+        obj = BaseModel(1, 2, 3)
         kid = 'BaseModel.{}'.format(obj.id)
         self.assertTrue(kid in storage.all() and storage.all()[kid] is obj)
 
-         obj = BaseModel(id=str(uuid4()), created_at=now.isoformat(),
+        obj = BaseModel(id=str(uuid4()), created_at=now.isoformat(),
                         updated_at=now.isoformat())
         kid = 'BaseModel.{}'.format(obj.id)
         self.assertFalse(kid in storage.all())
